@@ -62,8 +62,28 @@ def test_get_missing_keys():
     actual = wpe.get_missing_keys(dict_ref, dict_to_compare)
     print_test_results(wpe.get_missing_keys, expected, actual)
 
+def test_get_missing_keys_with_count():
 
 
+    dict_ref = {1:1, 2:2, 3:3}
+    dict_to_compare = {2:2}
+    expected = (2, [1, 3])
+    actual = wpe.get_missing_keys_with_count(dict_ref, dict_to_compare)
+    print_test_results(wpe.get_missing_keys_with_count, expected, actual)
+
+
+
+    actual =[1, 2, 2, 3]
+    expected = [1, 2, 3]
+
+
+def test_flatten_list(): 
+    
+    in_list = [1, (2,3), [4,5]]
+    expected = [1, 2, 3, 4, 5]
+    actual = wpe.flatten_list()
+    print_test_results(wpe.flatten_list, expected, actual)  
+    
 def get_test_functions():
     """Returns a list of functions that begin with the word test in the order
        they appear in this file."""
