@@ -14,7 +14,7 @@ from world_pop_by_country import data as country_pop
 
 # Key = country and value is number (i.e. not text containing commas)
 #
-country_pop_dict = dict()
+country_pop_dict = {}
 
 def main():
     lines = country_pop.split('\n')
@@ -67,56 +67,52 @@ def set_country_populations_dict():
          and value is a tuple containing two elements:
             1. A numeric version of the comma separated number in the
                Pop 01Jul2017 column
-            2. The % change as a positive or negative number
-    """
-    global country_pop_dict
+            2. The % change as a positive or negative number"""
 
+    pop2017dict = {}
 
-    lines = country_pop.split('\n')
-    pop =[]
+    lines = country_pop.splitlines()[1:]
     for line in lines:
-        dic= line.split('\t')
-        pop.append(dic)
-
-    for i in pop:
-        parts = i.split('\t')
-        pop2017 = parts[5].replace(',','')
-
-    return pop(pop2017 + parts[6]
+        data = line.split('\t')
+        pop2017dict.update({data[1] : (data[5], data[6])})
+    return pop2017dict
 
 
-
-
-def get_population(country_name):
+def get_population():
     """Given the name of the country, return the population as of 01Jul2017
        from country_populations_dict.  If the country_populations_dict is
        empty (i.e. no keys or values), then run set_country_populations_dict
        to initialize it."""
-    lines = country_pop.split('\n')
-    co_pop = []
-    for line in lines:
-        country= line.split('\t')
-        co.append(country)
 
-
-    allco= []
-    allpop=[]
-    for i in allco:
-        pop2017 = parts[5].replace(',','')
-        allpop.append(pop2017)
-
-        allco.append(i[1])
-    return (allco + pop2017)
+##    lines = country_pop.split('\n')
+##    co_pop = []
+##    for line in lines:
+##        country= line.split('\t')
+##        co.append(country)
+##
+##
+##    allco= []
+##    allpop=[]
+##    for i in allco:
+##        pop2017 = parts[5].replace(',','')
+##        allpop.append(pop2017)
+##
+##        allco.append(i[1])
+##    return (allco + pop2017)
+    pass
 
 def get_continents():
     """Return the list of continents"""
-    return ['Asia']
-##    lines = country_pop.split('\n')
-##    c= lines.partition(' ')
-##    conti= c[2]
-##    continent.append(c[2])
-##
-##    for i in c:
+
+    continents = []
+
+    lines = country_pop.splitlines()[1:]
+    for line in lines:
+        data = line.split('\t')
+        if data[2] not in continents:
+            continents.append(data[2])
+    continents.sort()
+    return continents
 
 
 
@@ -125,7 +121,17 @@ def get_continent_populations():
     """Returns a dict where the key is the name of the continent and
        the value is the total of all countries on that continent"""
 
-    pass
+    poptotaldict = {}
+
+    lines = country_pop.splitlines()[1:]
+    for line in lines:
+        data = line.split('\t')
+        if data[2] not in poptotaldict:
+            poptotaldict.update({data[2] : int(data[5].replace(',', ''))})
+        else:
+            poptotaldict[data[2]] = int(data[5].replace(',', '')) + poptotaldict[data[2]]
+    return poptotaldict
+
 
 if __name__ == '__main__':
     main()

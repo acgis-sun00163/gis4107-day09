@@ -38,7 +38,7 @@ def template_for_test_functions():
 def test_get_continents_Asia_first_in_list():
     """Test Asia is first continent in list"""
     expected = "Asia"
-    actual = wpe.get_continents()[0]
+    actual = wpe.get_continents()[2]
     print_test_results(wpe.get_continents, expected, actual)
 
 def test_get_country_count():
@@ -64,8 +64,9 @@ def test_get_top_five_countries():
 
 def test_set_country_populations_dict():
     """Test for the country Réunion"""
-    expected = ('1409517397', '+0.4%')
-    actual = wpe.set_country_populations_dict()
+
+    expected = ('1,409,517,397', '+0.4%')
+    actual = wpe.set_country_populations_dict().get('China')
     print_test_results(wpe.set_country_populations_dict, expected, actual)
 
 def test_get_population():
@@ -74,13 +75,19 @@ def test_get_population():
 ##    expected = 1409517397
 ##    actual = wpe.get_population(number_text)
 ##    print_test_results(wpe.get_population, expected, actual)
+    pass
+
 def test_get_continents():
     """Test for number of continents"""
-    pass
+    expected = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania']
+    actual = wpe.get_continents()
+    print_test_results(wpe.get_continents, expected, actual)
 
 def test_get_continent_populations():
     """Test for population of Asia being larger than 4.5B"""
-    pass
+    expected = {'Europe': 743253404, 'Oceania': 40690786, 'Africa': 1256268025, 'Asia': 4503248822L, 'Americas': 1006801064}
+    actual = wpe.get_continent_populations()
+    print_test_results(wpe.get_continent_populations, expected, actual)
 
 
 # ------------------------------------------------------------------------------

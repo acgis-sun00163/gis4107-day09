@@ -17,8 +17,7 @@ def main():
 def get_missing_keys(dict_ref, dict_to_compare):
     """Returns a LIST of missing keys
     OR an empty list if no keys are missing."""
-##    actual = [1, 3]
-##    return actual
+
 
     leftovers = []
     for item in dict_ref.keys():
